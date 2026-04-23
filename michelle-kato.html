@@ -1,0 +1,635 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Michelle Kato — Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --black:#18141A;
+  --white:#ffffff;
+  --purple:#6D28D9;
+  --purple-light:#f0e0ff;
+  --purple-mid:#4e0882;
+  --blue:#A855F7;
+  --gray:#f4f4f4;
+  --ink:#111111;
+  --ink-mid:#333333;
+  --ink-light:#666666;
+  --border:#e0e0e0;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;line-height:1.6;}
+
+/* PROGRESS */
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:999;transition:width .1s linear;border-radius:0 2px 2px 0;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 1.5rem;height:54px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s;}
+nav.scrolled{border-color:rgba(0,0,0,.08);box-shadow:0 1px 0 rgba(0,0,0,.06);}
+.nav-logo{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.25rem;font-weight:900;color:var(--ink);text-decoration:none;letter-spacing:-.02em;}
+.nav-logo span{color:var(--purple);}
+.nav-cta{background:transparent;color:var(--purple);border:1px solid var(--purple);padding:.4rem 1.1rem;border-radius:100px;font-size:.8rem;font-weight:700;text-decoration:none;transition:background .2s,color .2s,border-color .2s,transform .2s;}
+.nav-cta:hover{background:var(--purple);color:var(--white);transform:translateY(-1px);}
+
+/* SHARED */
+.wrap{max-width:1000px;margin:0 auto;width:100%;padding:0 1.5rem;}
+.wrap-wide{max-width:1000px;margin:0 auto;width:100%;padding:0 1.5rem;}
+.sec{padding:88px 0;}
+.sec-sm{padding:68px 0;}
+.eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-light);margin-bottom:.75rem;display:block;}
+.ttl{font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;font-size:clamp(2.5rem,7vw,4.2rem);line-height:1;letter-spacing:-.03em;color:var(--ink);margin-bottom:1.5rem;}
+.ttl em{font-style:normal;color:var(--ink);}
+.ttl-w{color:var(--white);}
+.ttl-sm{font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;font-size:clamp(1rem,2vw,1.35rem);line-height:1.2;letter-spacing:-.02em;color:var(--ink);margin-bottom:1rem;}
+.ttl-w em{color:var(--white)!important;}
+.body{font-size:.93rem;color:var(--ink-mid);line-height:1.8;margin-bottom:1.25rem;max-width:720px;}
+.body-dim{color:rgba(255,255,255,.75);}
+
+.btn{display:inline-flex;align-items:center;gap:.45rem;padding:.9rem 1.9rem;border-radius:100px;font-size:.9rem;font-weight:800;text-decoration:none;transition:all .2s;font-family:inherit;border:none;cursor:pointer;letter-spacing:-.01em;}
+.btn-p{background:var(--purple);color:var(--white);}
+.btn-p:hover{background:var(--purple-mid);transform:translateY(-2px);box-shadow:0 10px 28px rgba(101,9,168,.4);}
+/* btn-p on dark sections override */
+.cta .btn-p, .bb .btn-p, .pb .btn-p{background:var(--blue);color:var(--black);}
+.cta .btn-p:hover, .bb .btn-p:hover, .pb .btn-p:hover{background:var(--white);color:var(--black);box-shadow:none;}
+.cta .btn-o{color:var(--white);border-color:var(--white);}
+.cta .btn-o:hover{background:var(--white);color:var(--black);border-color:var(--white);}
+.btn-o{background:transparent;color:var(--purple);border:1px solid var(--purple);}
+.btn-o:hover{background:var(--purple);color:var(--white);transform:translateY(-2px);}
+.btn-ghost{background:var(--blue);color:var(--black);border:none;font-weight:800;}
+.btn-ghost:hover{background:var(--white);color:var(--black);transform:translateY(-2px);}
+
+/* ARROWS */
+.arrows{display:flex;flex-direction:column;align-items:center;padding:0;gap:5px;}
+.arr{display:none;}
+
+/* HERO */
+.hero{background:var(--white);padding:96px 1.5rem 56px;}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:2rem;max-width:1000px;margin:0 auto;}
+.hero-h{font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;font-size:clamp(4rem,15vw,8rem);line-height:.95;letter-spacing:-.04em;color:var(--ink);margin-bottom:1.1rem;}
+.hero-h em{font-style:normal;color:var(--ink);}
+.hero-sub{font-size:.95rem;color:var(--ink-mid);line-height:1.8;margin-bottom:1.75rem;max-width:400px;}
+.hero-sub strong{color:var(--ink);}
+.hero-btns{display:flex;gap:.6rem;flex-wrap:wrap;}
+.hero-stats{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.75rem;}
+.hstat-val{font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;font-size:1.4rem;color:var(--ink);line-height:1;letter-spacing:-.03em;}
+.hstat-lbl{font-size:.72rem;color:var(--ink-light);margin-top:.2rem;}
+
+/* current badge */
+.current-badge{display:inline-flex;align-items:center;gap:.45rem;background:#f0fdf4;border:none;border-radius:100px;padding:.28rem .85rem;font-size:.72rem;font-weight:700;color:#166534;margin-bottom:1rem;}
+.current-dot{width:7px;height:7px;border-radius:50%;background:#10b981;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+.me-wrap{width:100%;display:flex;align-items:center;justify-content:center;position:relative;}
+.me-video{width:75%;aspect-ratio:9/16;border-radius:1.25rem;overflow:hidden;background:var(--gray);display:block;object-fit:cover;}
+.me-sound{position:absolute;bottom:1rem;right:13%;background:rgba(0,0,0,.5);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(6px);transition:background .2s;}
+.me-sound:hover{background:rgba(0,0,0,.75);}
+.me-sound svg{width:16px;height:16px;fill:white;}
+@media(max-width:767px){.me-video{width:60%;aspect-ratio:9/16;}.gif-hero{display:none!important;}}
+@media(min-width:768px){
+  .hero-grid{grid-template-columns:1fr 1fr;align-items:center;gap:3rem;}
+}
+
+/* WHY MI — new section */
+.why-sec{background:var(--black);padding:96px 0;}
+.why-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:2rem;}
+@media(min-width:640px){.why-grid{grid-template-columns:repeat(3,1fr);}}
+.why-card{background:rgba(255,255,255,.03);border:none;border-radius:1.25rem;padding:1.5rem;transition:background .3s;}
+.why-card:hover{background:rgba(109,40,217,.08);}
+.why-img{width:96px;height:96px;object-fit:contain;margin-bottom:.75rem;display:block;}
+.why-title{font-weight:700;font-size:.92rem;color:rgba(255,255,255,.85);margin-bottom:.4rem;}
+.why-desc{font-size:.78rem;color:rgba(255,255,255,.38);line-height:1.7;}
+
+/* BG TRANSITION SPACING */
+.bg-sep{padding-top:120px!important;}
+
+/* CASE CAROUSEL */
+.cases-sec{background:var(--black);padding:68px 0 28px;}
+.c-outer{overflow:hidden;-webkit-mask:linear-gradient(to right,transparent,black 4%,black 96%,transparent);mask:linear-gradient(to right,transparent,black 4%,black 96%,transparent);}
+.c-track{display:flex;flex-wrap:nowrap;gap:1.5rem;padding:0 1.5rem 1rem;width:max-content;animation:cmarquee 28s linear infinite;cursor:default;}
+.c-track:hover{animation-play-state:paused;}
+@keyframes cmarquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.ccard{flex-shrink:0;width:420px;background:transparent;border:none;border-radius:0;overflow:visible;position:relative;}
+.ccard:hover{border-color:transparent;}
+.clink{position:static;}
+.ccard-cover{width:420px;height:420px;background:#1e1e1e;display:block;border-radius:.75rem;overflow:hidden;cursor:pointer;}
+.ccard-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;}
+.ccard-cover:hover img{transform:scale(1.04);}
+@media(max-width:600px){
+  .c-outer{overflow:visible;-webkit-mask:none;mask:none;}
+  .c-track{flex-direction:column;width:100%;animation:none;padding:0 1.5rem 1rem;}
+  .ccard{width:100%;}
+  .ccard-cover{width:100%;aspect-ratio:1/1;height:auto;}
+  .ccard-clone{display:none;}
+}
+.cph{text-align:center;color:rgba(255,255,255,.12);}
+.cph svg{width:22px;height:22px;display:block;margin:0 auto .3rem;}
+.cph p{font-size:.62rem;}
+.ccard-body{padding:.75rem 0 0;}
+.ctitle{font-weight:700;font-size:1.05rem;color:rgba(255,255,255,.88);line-height:1.3;margin-bottom:.5rem;letter-spacing:-.02em;}
+.clink{font-size:.85rem;font-weight:700;color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;transition:gap .2s;}
+.clink:hover{gap:.55rem;}
+
+/* LOGOS */
+.logos-sec{background:var(--black);padding:28px 0 76px;}
+.logos-label{text-align:center;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.75rem;}
+.logos-grid{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2rem 3rem;}
+.lcard{display:flex;align-items:center;justify-content:center;opacity:.45;transition:opacity .3s;filter:brightness(0) invert(1);}
+.lcard:hover{opacity:.85;}
+.lcard img{height:48px;width:auto;display:block;}
+
+/* PROOF BLOCKS */
+.proof{padding:64px 0;}
+.pw{background:var(--white);}
+.pg{background:var(--white);}
+.proof-img{width:100%;background:var(--gray);border-radius:.875rem;border:none;margin:1.25rem 0;overflow:hidden;}
+.proof-img img{width:100%;height:auto;display:block;}
+.img-qt{display:grid;grid-template-columns:3fr 1fr;gap:1.5rem;align-items:stretch;margin-top:1.25rem;}
+.img-qt .proof-img{margin:0;}
+.img-qt .q{margin:0;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;}
+@media(max-width:700px){.img-qt{grid-template-columns:1fr;}.img-qt .q{height:auto;}}
+.proof-cols{display:grid;grid-template-columns:1fr auto;gap:1rem 3rem;align-items:flex-end;margin-bottom:1.25rem;}
+.proof-cols > div:first-child .body{margin-bottom:0;}
+.proof-col-link{display:flex;align-items:flex-end;white-space:nowrap;}
+@media(max-width:640px){.proof-cols{grid-template-columns:1fr;gap:.5rem;}.proof-col-link{align-items:flex-start;}}
+.iph{text-align:center;color:#aaa;}
+.iph svg{width:26px;height:26px;display:block;margin:0 auto .35rem;}
+.iph p{font-size:.7rem;}
+.plink{display:inline-flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:700;color:var(--purple);text-decoration:none;transition:gap .2s;}
+.plink:hover{gap:.7rem;}
+.plink svg{width:12px;height:12px;}
+
+/* QUOTE */
+.q{position:relative;isolation:isolate;border-radius:.75rem;padding:1.1rem 1.4rem 1.1rem 1.6rem;margin-top:1.1rem;max-width:100%;overflow:visible;}
+.q.on-g{background:none;}
+.q.on-p{background:none;}
+.qt{font-size:.88rem;color:var(--ink-mid);line-height:1.8;font-style:italic;margin-bottom:.5rem;text-align:left;position:relative;}
+.qt::before{content:'\201C';font-size:8rem;color:#EBFC77;font-weight:900;line-height:.85;position:absolute;top:-.9rem;left:-2rem;z-index:-1;pointer-events:none;opacity:.9;}
+.qt::after{content:none;}
+.q.on-p .qt::before{color:#EBFC77;opacity:.7;}
+.q.on-dark .qt::before{color:#2C2730;opacity:1;}
+.q.on-cream .qt::before{color:#F0E6D8;opacity:1;}
+.q.on-white .qt::before{color:#EFEFEF;opacity:1;}
+.qt-w{color:rgba(255,255,255,.85);}
+.qt-hl{background:rgba(109,40,217,.13);color:var(--ink);font-style:normal;font-weight:700;border-radius:3px;padding:0 3px;}
+.qt-hl-w{background:rgba(255,255,255,.15);color:#fff;font-style:normal;font-weight:700;border-radius:3px;padding:0 3px;}
+.qa{display:flex;align-items:center;gap:.6rem;}
+.qa-photo{width:40px;height:40px;border-radius:50%;background:var(--gray);flex-shrink:0;object-fit:cover;display:block;}
+.an{font-weight:700;font-size:.78rem;color:var(--ink);display:block;}
+.ar{font-size:.74rem;color:var(--ink-light);margin-top:.1rem;display:block;}
+
+.an-w{color:rgba(255,255,255,.9);}
+.ar-w{color:rgba(255,255,255,.45);}
+/* FACILITATION GRID */
+.facil-grid{display:flex;justify-content:center;gap:.75rem;margin-top:1.5rem;}
+.facil-img{flex:1 1 0;min-width:0;aspect-ratio:1/1;border-radius:.75rem;overflow:hidden;background:rgba(255,255,255,.06);border:none;}
+.facil-img img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* PURPLE BLOCK */
+.pb{background:#FFFCF6;padding:96px 0;text-align:left;}
+/* BLACK BLOCK */
+.bb{background:var(--black);padding:96px 0;}
+
+/* WRITING */
+.wgrid{display:flex;flex-direction:row;gap:1.25rem;margin-top:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:.5rem;}
+.wgrid::-webkit-scrollbar{display:none;}
+@media(max-width:600px){.wgrid{flex-direction:column;overflow-x:visible;}.wcard{width:100%;}.wcover{width:100%;}}
+@media(min-width:601px) and (max-width:899px){.wgrid{flex-wrap:nowrap;}}
+@media(min-width:900px){.wgrid{display:grid;grid-template-columns:repeat(2,1fr);overflow-x:visible;}  }
+.wcard{flex-shrink:0;width:100%;background:transparent;border:none;border-radius:0;padding:0;overflow:visible;display:flex;flex-direction:column;scroll-snap-align:start;transition:none;}
+.wcard:hover{border-color:transparent;transform:none;box-shadow:none;}
+.wcover{width:100%;height:230px;background:var(--gray);border:none;border-radius:.75rem;display:block;overflow:hidden;flex-shrink:0;}
+.wcover img{width:100%;height:100%;object-fit:cover;display:block;}
+.wcph{text-align:center;color:#aaa;}
+.wcph svg{width:22px;height:22px;display:block;margin:0 auto .3rem;}
+.wcph p{font-size:.65rem;}
+.wcard-inner{padding:.75rem 0 0;display:flex;flex-direction:column;gap:.55rem;flex:1;}
+.wbadge{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);background:transparent;border:none;padding:.16rem 0;border-radius:100px;display:inline-block;width:fit-content;}
+.wtitle{font-weight:700;font-size:1.05rem;color:var(--ink);line-height:1.3;letter-spacing:-.02em;}
+.wdesc{font-size:.8rem;color:var(--ink-light);line-height:1.65;flex:1;}
+.wlink{font-size:.86rem;font-weight:700;color:var(--purple);text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;transition:gap .2s;margin-top:.5rem;}
+.wlink:hover{gap:.55rem;}
+.wlink-pt{font-size:.78rem;font-weight:400;color:var(--ink-light);text-decoration:none;display:inline-flex;align-items:center;gap:.25rem;margin-top:.1rem;transition:gap .2s,color .2s;}
+.wlink-pt:hover{gap:.5rem;color:var(--ink);}
+
+/* MEDIA */
+.mgrid{display:flex;flex-direction:row;gap:1.5rem;margin-top:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:.5rem;}
+.mgrid::-webkit-scrollbar{display:none;}
+@media(max-width:600px){.mgrid{flex-direction:column;overflow-x:visible;}.mcard{width:100%;}.mcard .yt-thumb{width:100%;}.mcard iframe{width:100%;}}
+@media(min-width:900px){.mgrid{display:grid;grid-template-columns:repeat(2,1fr);overflow-x:visible;}}
+.mcard{flex-shrink:0;width:100%;background:transparent;border:none;border-radius:0;overflow:visible;scroll-snap-align:start;}
+.mcard iframe{width:100%;height:230px;border:none;display:block;border-radius:.75rem;}
+.mcard .yt-thumb{width:100%;height:230px;position:relative;cursor:pointer;overflow:hidden;background:#000;border-radius:.75rem;}
+.mcard .yt-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s;}
+.mcard .yt-thumb:hover img{transform:scale(1.03);}
+.mcard .yt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(0,0,0,.72);border-radius:50%;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.mcard .yt-play svg{width:22px;height:22px;fill:#fff;margin-left:3px;}
+.mbody{padding:.75rem 0 0;}
+.mtag{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:.45rem;display:block;}
+.lang-tag{display:inline-block;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:.28rem .85rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.5rem;}
+.mtitle{font-weight:700;font-size:1.05rem;color:rgba(255,255,255,.82);line-height:1.3;}
+.mdesc{font-size:.78rem;color:rgba(255,255,255,.32);margin-top:.35rem;line-height:1.55;}
+
+/* AI */
+.ai-pills{display:flex;flex-wrap:wrap;gap:.45rem;margin:1.1rem 0;}
+.ap{font-size:.76rem;font-weight:600;color:rgba(255,255,255,.6);background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);padding:.32rem .8rem;border-radius:100px;transition:border-color .2s,color .2s;}
+.ap:hover{border-color:var(--purple);color:var(--white);}
+.ai-note{font-size:.78rem;color:rgba(255,255,255,.35);border-left:2px solid rgba(255,255,255,.2);padding-left:.85rem;line-height:1.7;margin-top:1.1rem;}
+
+/* CTA */
+.cta{background:var(--purple);padding:96px 0;text-align:center;}
+.cta-h{font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;font-size:clamp(2.8rem,11vw,6.5rem);color:var(--white);line-height:1;letter-spacing:-.04em;margin-bottom:1rem;}
+.cta-h em{font-style:normal;color:var(--white)!important;}
+.cta-sub{font-size:.9rem;color:rgba(255,255,255,.38);max-width:360px;margin:0 auto 2rem;line-height:1.75;}
+.cta-btns{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{background:var(--purple);padding:1.25rem 1.5rem;}
+.fi{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+.flogo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;font-size:1.05rem;color:var(--white);letter-spacing:-.02em;}
+.flogo span{color:#A78BFA;}
+.flinks{display:flex;gap:1.25rem;}
+.flinks a{font-size:.74rem;color:var(--white);text-decoration:none;font-weight:700;transition:color .2s;}
+.flinks a:hover{color:rgba(255,255,255,.65);}
+/* btt button stays on top of footer */
+#btt{position:fixed;bottom:1.5rem;right:1.5rem;width:42px;height:42px;border-radius:50%;background:var(--purple);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(101,9,168,.4);opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s,background .2s;z-index:200;}
+#btt svg{width:16px;height:16px;stroke:white;stroke-width:2.5;fill:none;}
+#btt.show{opacity:1;transform:translateY(0);}
+#btt:hover{background:var(--purple-mid);}
+
+/* HIGHLIGHT — white bg: #DDD6FE; dark bg: #5B21B6 */
+.hl{display:inline;background:linear-gradient(rgba(235,252,119,0) 55%,#EBFC77 55%);white-space:normal;}
+.hl-strong{display:inline;background:linear-gradient(rgba(220,245,60,0) 55%,#DCF53C 55%);white-space:normal;}
+.hl-dark{display:inline;background:linear-gradient(rgba(200,230,30,0) 55%,#C8E61E 55%);white-space:normal;}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.r.on{opacity:1;transform:none;}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Mi<span>✦</span>Kato</a>
+  <a href="mailto:michellemakato@gmail.com" class="nav-cta">Let’s talk</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+<h2 class="ttl r d1" style="font-size:clamp(3rem,9vw,5rem);">
+  Hi, I'm<br/>Michelle.
+</h2>
+
+      <p class="hero-sub r d2">
+  I'm a Senior Product Designer with 12 years of experience working on <span class="hl"><strong>large-scale, international products</strong></span> — at companies like MGM Resorts, Procore, and LexisNexis.<br/><br/>
+  I work end-to-end: from research and ideation all the way to handoff and documentation. I care about clarity — for users, for teams, and for the product.
+</p>
+
+      <div class="hero-stats r d3">
+        <div class="hstat"><div class="hstat-val">12</div><div class="hstat-lbl">Years in design</div></div>
+        <div class="hstat"><div class="hstat-val">5</div><div class="hstat-lbl">International companies</div></div>
+        <div class="hstat"><div class="hstat-val">EN / PT</div><div class="hstat-lbl">Bilingual</div></div>
+      </div>
+
+      <div class="hero-btns r d4">
+        <a href="#work" class="btn btn-p">View case studies</a>
+        <a href="Michelle_Kato_ATS_Resume.pdf" target="_blank" class="btn btn-o">Download resume</a>
+      </div>
+    </div>
+    <div class="r d2">
+      <img src="imgs/animar.gif" alt="" class="gif-hero" style="display:block;width:100%;max-width:520px;border-radius:1.25rem;"/>
+    </div>
+  </div>
+</section>
+
+<!-- arrows white→black -->
+<div class="arrows" style="background:var(--white);">
+  <div class="arr"></div><div class="arr"></div><div class="arr"></div>
+</div>
+
+
+<!-- ═══ CASE CAROUSEL ═══ -->
+<div class="cases-sec bg-sep" id="work">
+  <div style="padding:0 1.5rem 1.5rem;text-align:center;">
+    <h2 class="ttl ttl-w r d1">My best work.</h2>
+  </div>
+  <div class="c-outer">
+    <div class="c-track" id="cTrack">
+
+      <div class="ccard">
+        <a href="case-better-forms-better-leads.html" class="ccard-cover"><img src="imgs/case-01.png" alt="Better Forms, Better Leads"/></a>
+        <div class="ccard-body">
+          <div class="ctitle">Better Forms, Better Leads.</div>
+          <a href="case-better-forms-better-leads.html" class="clink">Read case study <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+
+      <div class="ccard">
+        <a href="case-complex-flows-guided-sending.html" class="ccard-cover"><img src="imgs/case-02.png" alt="Rethinking Document Sending, Starting with the Basics"/></a>
+        <div class="ccard-body">
+          <div class="ctitle">Rethinking Document Sending, Starting with the Basics.</div>
+          <a href="case-complex-flows-guided-sending.html" class="clink">Read case study <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <div class="ccard">
+        <a href="case-white-label-banking-platform.html" class="ccard-cover"><img src="imgs/case-04.png" alt="Scaling a White-Label Banking Platform"/></a>
+        <div class="ccard-body">
+          <div class="ctitle">Scaling a White-Label Banking Platform.</div>
+          <a href="case-white-label-banking-platform.html" class="clink">Read case study <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <div class="ccard">
+        <a href="case-journey-maps-loyalty-program.html" class="ccard-cover"><img src="imgs/case-03.png" alt="Journey Maps for a Complex Loyalty Program"/></a>
+        <div class="ccard-body">
+          <div class="ctitle">Journey Maps for a Complex Loyalty Program.</div>
+          <a href="case-journey-maps-loyalty-program.html" class="clink">Read case study <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- arrows black→black (logos) -->
+<div class="arrows" style="background:var(--black);">
+  <div class="arr arr-w"></div><div class="arr arr-w"></div><div class="arr arr-w"></div>
+</div>
+
+<!-- ═══ LOGOS ═══ -->
+<div class="logos-sec">
+  <div class="wrap-wide">
+    <p class="logos-label r">Trusted by teams at</p>
+    <div class="logos-grid">
+      <div class="lcard r d1"><img src="imgs/logo-fsl.png" alt="FullStack Labs"/></div>
+      <div class="lcard r d2"><img src="imgs/logo-lexisnexis.png" alt="LexisNexis"/></div>
+      <div class="lcard r d3"><img src="imgs/logo-mgm.png" alt="MGM Resorts"/></div>
+      <div class="lcard r d4"><img src="imgs/logo-procore.png" alt="Procore"/></div>
+      <div class="lcard r d5"><img src="imgs/logo-dci.png" alt="DCI"/></div>
+    </div>
+  </div>
+</div>
+
+<!-- arrows black→white -->
+<div class="arrows" style="background:var(--black);">
+  <div class="arr arr-w"></div><div class="arr arr-w"></div><div class="arr arr-w"></div>
+</div>
+
+<!-- ═══ WHY ME + 01 RESEARCH ═══ -->
+<div class="proof pw bg-sep">
+  <div class="wrap">
+    <h2 class="ttl r d1">Why me?</h2>
+    <div class="proof-cols">
+      <div>
+        <h2 class="ttl-sm r d1">I make research <em>usable.</em></h2>
+        <p class="body r d2">If people can't navigate your research, it doesn't help decisions. <span class="hl">I organize everything so anyone can understand what's happening and why.</span></p>
+      </div>
+      <div class="proof-col-link r d3">
+        <a href="https://medium.com/design-bootcamp/how-i-organize-research-in-miro-and-figjam-d2ac4cca99c5" target="_blank" class="plink">Read on Bootcamp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="img-qt">
+      <div class="proof-img r d4"><img src="imgs/documentation.png" alt="Research board screenshot"/></div>
+      <div class="q on-white r">
+        <p class="qt">She has an <strong>incredible eye for detail.</strong> Her organized approach, combined with her ability to rapidly learn new technologies, allows her to quickly adapt to requirement changes. <strong>Any team would be lucky to have Michelle's thoughtful work and positive energy.</strong></p>
+        <div class="qa"><div><div class="an">Vinícius Ferreira, Ph.D.</div><div class="ar">Manager · FullStack Labs</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="arrows" style="background:var(--white);">
+  <div class="arr"></div><div class="arr"></div><div class="arr"></div>
+</div>
+
+<!-- ═══ 02 HANDOFFS ═══ -->
+<div class="proof pg">
+  <div class="wrap">
+    <div class="proof-cols">
+      <div>
+        <h2 class="ttl-sm r d1">Devs don't need <em>to ask twice.</em></h2>
+        <p class="body r d2">Every edge case, state, and rule is documented upfront. <span class="hl">Work moves forward without blocking on design.</span></p>
+      </div>
+      <div class="proof-col-link r d3">
+        <a href="https://medium.com/design-bootcamp/how-i-structure-my-handoff-5f7c66be9216" target="_blank" class="plink">Read on Bootcamp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="img-qt">
+      <div class="proof-img r d4"><img src="imgs/handoff.png" alt="Handoff screenshot"/></div>
+      <div class="q on-g on-white r">
+        <p class="qt">"Michelle has been exceptional in her role as a product designer for FullStack. Her work for MGM Resorts has been outstanding, showcasing her talent and dedication. She consistently brings a positive attitude and has been incredibly helpful throughout our collaboration."</p>
+        <div class="qa"><div><div class="an">Scot Copland</div><div class="ar">Design Director · MGM Resorts</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="arrows" style="background:var(--white);">
+  <div class="arr"></div><div class="arr"></div><div class="arr"></div>
+</div>
+
+<!-- ═══ 03 PRESENTATIONS ═══ -->
+<div class="proof pw">
+  <div class="wrap">
+    <h2 class="ttl-sm r d1">No confusion <em>after the meeting.</em></h2>
+    <p class="body r d2">I present complex work in a way that people leave aligned. <span class="hl">Not just informed.</span></p>
+    <div class="img-qt">
+      <div class="proof-img r d3"><img src="imgs/presentation.png" alt="Presentation screenshot"/></div>
+      <div class="q on-white r">
+        <p class="qt">You have <strong>one of the best presentation styles on the team</strong> — so humble, so well detailed, well thought out, and so you. Very Well Done!</p>
+        <div class="qa"><div><div class="an">Rak Patel</div><div class="ar">Lead Animator · MGM Resorts International</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="arrows" style="background:var(--white);">
+  <div class="arr"></div><div class="arr"></div><div class="arr"></div>
+</div>
+
+<!-- ═══ 04 SPRINTS ═══ -->
+<div class="pb bg-sep">
+  <div class="wrap">
+    <h2 class="ttl r d1">40 people.<br/>One direction.</h2>
+    <p class="body r d2" style="margin:0 0 1.5rem;">From Design Sprints to Silent Critiques — I've facilitated sessions in Brazil and the US, always with mixed teams and one goal: <strong>leave the room with a decision, not just a discussion.</strong></p>
+    <div class="q on-cream r d3">
+      <p class="qt">She conducted cross-functional meetings with stakeholders from different areas to translate knowledge into relevant UX artifacts, <strong>ensuring user needs were being addressed in the best way possible.</strong></p>
+      <div class="qa"><div><div class="an">Luciana Alvejar</div><div class="ar">Sr. Content Strategist · MGM Resorts International</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="arrows" style="background:#FFFCF6;">
+  <div class="arr"></div><div class="arr"></div><div class="arr"></div>
+</div>
+
+
+<!-- ═══ 05 WRITING ═══ -->
+<div class="proof pw bg-sep">
+  <div class="wrap-wide">
+    <h2 class="ttl r d1">I write to<br/><em>clarify thinking.</em></h2>
+    <p class="body r d2" style="margin-bottom:1.5rem;">Writing is how I structure ideas. <span class="hl">What you read is the same way I work.</span> Published on UX Collective and Bootcamp.</p>
+    <div class="wgrid">
+
+      <div class="wcard r d1">
+        <div class="wcover"><img src="imgs/medium-handoff.png" alt="Article cover - Handoff"/></div>
+        <div class="wcard-inner">
+          <div class="wtitle">How I Structure My Handoff</div>
+          <a href="https://medium.com/design-bootcamp/how-i-structure-my-handoff-5f7c66be9216" target="_blank" class="wlink">Read on Bootcamp <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="https://brasil.uxdesign.cc/como-estruturo-meu-handoff-7c67051d2000" target="_blank" class="wlink-pt">Or, read on UX Collective in Portuguese <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <div class="wcard r d2">
+        <div class="wcover"><img src="imgs/medium-documentation.png" alt="Article cover - Documentation"/></div>
+        <div class="wcard-inner">
+          <div class="wtitle">How I organize research in Miro and FigJam</div>
+          <a href="https://medium.com/design-bootcamp/how-i-organize-research-in-miro-and-figjam-d2ac4cca99c5" target="_blank" class="wlink">Read on Bootcamp <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="https://brasil.uxdesign.cc/como-organizo-pesquisas-no-miro-e-figjam-32499b7ac371" target="_blank" class="wlink-pt">Or, read on UX Collective in Portuguese <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <div class="wcard r d3">
+        <div class="wcover"><img src="imgs/medium-critique.png" alt="Article cover - Silent Critique"/></div>
+        <div class="wcard-inner">
+          <div class="wtitle">Adapting Silent Critique for journey maps</div>
+          <a href="https://medium.com/design-bootcamp/adapting-silent-critique-for-journey-maps-bb10164e1afd" target="_blank" class="wlink">Read on Bootcamp <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="https://brasil.uxdesign.cc/adaptando-o-silent-critique-para-journey-maps-e95e54021091" target="_blank" class="wlink-pt">Or, read on UX Collective in Portuguese <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <div class="wcard r d4">
+        <div class="wcover"><img src="imgs/medium-gamificacao.png" alt="Article cover - Gamification"/></div>
+        <div class="wcard-inner">
+          <div class="wtitle">Demystifying Gamification</div>
+          <a href="https://medium.com/design-bootcamp/demystifying-gamification-2a949fdbdbd0" target="_blank" class="wlink">Read on Bootcamp <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="https://brasil.uxdesign.cc/gamifica%C3%A7%C3%A3o-descomplicada-52966f5a7817" target="_blank" class="wlink-pt">Or, read on UX Collective in Portuguese <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr style="border:none;border-top:1px solid var(--border);margin:0;"/>
+
+<!-- ═══ 06 MENTORING ═══ -->
+<div class="bb bg-sep">
+  <div class="wrap">
+    <h2 class="ttl ttl-w r d1">I don't keep<br/><em>knowledge to myself.</em></h2>
+    <p class="body body-dim r d2">What I learn in projects, I share. <strong>Mentoring, workshops, and critiques are part of how I work.</strong></p>
+    <div class="q on-p on-dark r d3">
+      <p class="qt qt-w">I've taken courses, but I never felt prepared when it came to UX. The key difference is your communication. I can understand the content you share without theoretical difficulty. I appreciate how you conduct sessions using FigJam, paying attention to my short, medium, and long-term goals.</p>
+      <div class="qa"><div><div class="an an-w">Juan Alves</div><div class="ar ar-w">Mentee · UX/UI Designer</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="arrows" style="background:var(--black);">
+  <div class="arr arr-w"></div><div class="arr arr-w"></div><div class="arr arr-w"></div>
+</div>
+
+
+<!-- ═══ CTA ═══ -->
+<section class="cta bg-sep" id="contact">
+  <div class="wrap" style="text-align:center;">
+    <h2 class="cta-h r" style="color:var(--white);">Let’s build<br/>something<br/><em>great.</em></h2>
+    <p class="cta-sub r d2" style="color:rgba(255,255,255,.55);">Open to international opportunities — full-time or contract. If you think we’d work well together, I’d love to hear from you.</p>
+    <div class="cta-btns r d3">
+      <a href="mailto:michellemakato@gmail.com" class="btn btn-o">Email me</a>
+      <a href="https://linkedin.com/in/michellekato" target="_blank" class="btn btn-o">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <span class="flogo">Mi<span>✦</span>Kato</span>
+    <div class="flinks">
+      <a href="https://linkedin.com/in/michellekato" target="_blank">LinkedIn</a>
+      <a href="https://medium.com/@michelle-kato" target="_blank">Medium</a>
+      <a href="https://www.youtube.com/@michelle-kato" target="_blank">YouTube</a>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<script>
+const prog = document.getElementById('prog');
+const nav  = document.getElementById('nav');
+const btt  = document.getElementById('btt');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  prog.style.width = pct + '%';
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+  btt.classList.toggle('show', window.scrollY > 400);
+});
+
+// Reveal
+const els = document.querySelectorAll('.r');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+els.forEach(el => obs.observe(el));
+requestAnimationFrame(() => {
+  els.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight + 50) el.classList.add('on'); });
+});
+
+// YouTube thumbnails click-to-play
+document.querySelectorAll('.yt-thumb').forEach(thumb => {
+  thumb.addEventListener('click', function() {
+    const id = this.dataset.id;
+    this.outerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen style="width:420px;height:230px;border:none;display:block;border-radius:.75rem;"></iframe>';
+  });
+});
+
+// Infinite marquee — duplicate cards for seamless loop
+const track = document.getElementById('cTrack');
+Array.from(track.children).forEach(card => {
+  const clone = card.cloneNode(true);
+  clone.classList.add('ccard-clone');
+  clone.setAttribute('aria-hidden','true');
+  track.appendChild(clone);
+});
+
+// Sound toggle
+const heroVid = document.getElementById('heroVid');
+const soundBtn = document.getElementById('soundBtn');
+const iconMuted = document.getElementById('iconMuted');
+const iconSound = document.getElementById('iconSound');
+soundBtn.addEventListener('click', () => {
+  heroVid.muted = !heroVid.muted;
+  if (!heroVid.muted) heroVid.volume = 1;
+  iconMuted.style.display = heroVid.muted ? 'block' : 'none';
+  iconSound.style.display = heroVid.muted ? 'none' : 'block';
+});
+
+// Arrows click → scroll next section to top
+document.querySelectorAll('.arrows').forEach(arrows => {
+  arrows.style.cursor = 'pointer';
+  arrows.addEventListener('click', () => {
+    let next = arrows.nextElementSibling;
+    if (next) next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+</script>
+</body>
+</html>

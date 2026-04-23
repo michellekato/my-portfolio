@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Rethinking Document Sending — Michelle Kato</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --black:#18141A;
+  --white:#ffffff;
+  --purple:#6D28D9;
+  --purple-light:#f0e0ff;
+  --purple-mid:#4e0882;
+  --blue:#A855F7;
+  --gray:#f4f4f4;
+  --ink:#111111;
+  --ink-mid:#333333;
+  --ink-light:#666666;
+  --border:#e0e0e0;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;line-height:1.6;}
+
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:999;transition:width .1s linear;border-radius:0 2px 2px 0;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 1.5rem;height:54px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s;}
+nav.scrolled{border-color:rgba(0,0,0,.08);box-shadow:0 1px 0 rgba(0,0,0,.06);}
+.nav-logo{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.25rem;font-weight:900;color:var(--ink);text-decoration:none;letter-spacing:-.02em;}
+.nav-logo span{color:var(--purple);}
+.nav-back{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:700;color:var(--ink-light);text-decoration:none;transition:color .2s;}
+.nav-back:hover{color:var(--purple);}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;}
+
+.wrap{max-width:680px;margin:0 auto;width:100%;padding:0 1.5rem;}
+.wrap-wide{max-width:960px;margin:0 auto;width:100%;padding:0 1.5rem;}
+.eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-light);margin-bottom:.75rem;display:block;}
+.eyebrow-w{color:rgba(255,255,255,.4);}
+
+.r{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease;}
+.r.on{opacity:1;transform:none;}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}.d5{transition-delay:.35s}
+
+/* ── HERO ── */
+.cs-hero{background:#F3D2C9;padding:96px 1.5rem 64px;position:relative;overflow:hidden;}
+.cs-hero::before{content:'';position:absolute;top:-120px;right:-120px;width:480px;height:480px;border-radius:50%;display:none;}
+.cs-hero-inner{max-width:960px;margin:0 auto;}
+.cs-tag{display:inline-flex;align-items:center;gap:.4rem;background:rgba(0,0,0,.08);border-radius:100px;padding:.28rem .9rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.7);margin-bottom:1.25rem;}
+.cs-h1{font-weight:900;font-size:clamp(2.4rem,7vw,5rem);line-height:.96;letter-spacing:-.04em;color:var(--black);margin-bottom:1rem;}
+.cs-h1 em{font-style:normal;color:var(--black);}
+.cs-subtitle{font-size:1rem;color:rgba(0,0,0,.6);line-height:1.75;max-width:560px;margin-bottom:2.5rem;}
+.cs-meta{display:flex;flex-wrap:wrap;gap:2rem;padding-top:1.75rem;}
+.cs-meta-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(0,0,0,.4);margin-bottom:.3rem;}
+.cs-meta-value{font-size:.85rem;font-weight:600;color:var(--black);}
+
+/* ── HERO IMAGE ── */
+.hero-img-wrap{width:100%;overflow:hidden;background:#F4F2F5;}
+.hero-img{width:100%;background:#F4F2F5;border:none;display:flex;align-items:center;justify-content:center;min-height:200px;}
+.hero-img img{display:block;width:100%;max-width:1440px;height:auto;margin:0 auto;}
+@media(max-width:600px){
+  .hero-img-wrap{padding:0 1.5rem;}
+  .hero-img{border-radius:.875rem;}
+}
+.img-ph{text-align:center;color:#bbb;padding:3rem;}
+.img-ph svg{width:32px;height:32px;display:block;margin:0 auto .5rem;stroke:currentColor;fill:none;stroke-width:1.2;}
+.img-ph p{font-size:.72rem;}
+
+/* ── OVERVIEW STRIP ── */
+.overview-strip{background:#F3D2C9;padding:24px 0;border-top:1px solid rgba(0,0,0,.1);}
+.ov-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(0,0,0,.1);}
+@media(min-width:640px){.ov-grid{grid-template-columns:repeat(4,1fr);}}
+.ov-cell{background:#F3D2C9;padding:.85rem;text-align:center;}
+.ov-val{font-weight:900;font-size:1.8rem;color:var(--black);letter-spacing:-.04em;line-height:1;}
+.ov-lbl{font-size:.68rem;color:rgba(0,0,0,.55);margin-top:.35rem;font-weight:600;letter-spacing:.04em;}
+
+/* ── SECTION BLOCKS ── */
+.sec-white{padding:80px 0;background:var(--white);}
+.sec-gray{padding:80px 0;background:#fafafa;}
+.sec-black{padding:80px 0;background:var(--black);}
+
+.sec-h{font-weight:900;font-size:clamp(1.8rem,4.5vw,2.8rem);line-height:1.05;letter-spacing:-.03em;color:var(--ink);margin-bottom:.75rem;}
+.sec-h em{font-style:normal;color:var(--ink);}
+.sec-h-w{color:var(--white);}
+.sec-h-w em{color:var(--white)!important;}
+
+.body-text{font-size:.93rem;color:var(--ink-mid);line-height:1.85;margin-bottom:1rem;}
+.body-text-w{color:rgba(255,255,255,.65);}
+.body-text strong{color:var(--ink);font-weight:700;}
+.body-text-w strong{color:var(--white);}
+
+/* ── IMAGE BLOCK ── */
+.img-block{width:100%;background:var(--gray);border-radius:1rem;overflow:hidden;margin:1.75rem 0;display:flex;align-items:center;justify-content:center;}
+.img-block img{width:100%;height:auto;display:block;}
+.img-block.ph{min-height:180px;}
+.img-caption{font-size:.72rem;color:var(--ink-light);margin-top:-.9rem;margin-bottom:1.5rem;font-style:italic;}
+
+/* ── TWO COL ── */
+.two-col{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:1.5rem;}
+@media(min-width:640px){.two-col{grid-template-columns:1fr 1fr;}}
+.col-card-w{background:var(--gray);border-radius:1.1rem;padding:1.5rem;}
+.col-card{background:rgba(255,255,255,.04);border-radius:1.1rem;padding:1.5rem;}
+.col-card-title-dark{font-weight:700;font-size:.88rem;color:var(--ink);margin-bottom:.5rem;}
+.col-card-title{font-weight:700;font-size:.88rem;color:rgba(255,255,255,.85);margin-bottom:.5rem;}
+.col-card-desc-dark{font-size:.8rem;color:var(--ink-light);line-height:1.7;}
+.col-card-desc{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.7;}
+
+/* ── THREE COL ── */
+.three-col{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.5rem;}
+@media(min-width:640px){.three-col{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:900px){.three-col{grid-template-columns:repeat(3,1fr);}}
+
+/* ── INSIGHT CARDS ── */
+.insight-card{padding:.9rem 1.1rem;background:rgba(109,40,217,.05);border-radius:0 .75rem .75rem 0;margin-bottom:.75rem;}
+.insight-card-w{padding:.9rem 1.1rem;background:rgba(168,85,247,.1);border-radius:0 .75rem .75rem 0;margin-bottom:.75rem;}
+.insight-text{font-size:.87rem;color:var(--ink-mid);line-height:1.7;}
+.insight-text-w{font-size:.87rem;color:rgba(255,255,255,.65);line-height:1.7;}
+
+/* ── RULE HIGHLIGHT ── */
+.rule-box{background:var(--black);border-radius:1rem;padding:1.75rem;margin:1.75rem 0;}
+.rule-item{display:flex;align-items:flex-start;gap:1rem;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.rule-item:last-child{border-bottom:none;padding-bottom:0;}
+.rule-icon{width:32px;height:32px;border-radius:50%;background:rgba(168,85,247,.15);border:1px solid rgba(168,85,247,.3);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:var(--blue);flex-shrink:0;}
+.rule-text{font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.65;}
+.rule-text strong{color:var(--white);}
+
+/* ── AI NOTE ── */
+.ai-note{background:#f0fdf4;border-radius:1rem;padding:1.25rem 1.4rem;margin-top:1rem;}
+.ai-note-title{font-weight:700;font-size:.8rem;color:#15803d;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;}
+.ai-note-body{font-size:.82rem;color:#166534;line-height:1.75;}
+
+/* ── VISUAL NOTE ── */
+.visual-note{background:#f8f4ff;border-radius:1rem;padding:1.25rem 1.4rem;margin-top:1.75rem;}
+.visual-note-title{font-weight:700;font-size:.8rem;color:var(--purple);margin-bottom:.4rem;}
+.visual-note-body{font-size:.82rem;color:var(--ink-mid);line-height:1.75;}
+
+/* ── PROCESS STEPS ── */
+.steps{display:flex;flex-direction:column;gap:0;margin-top:1.5rem;position:relative;}
+.step{display:grid;grid-template-columns:40px 1fr;gap:1rem;padding-bottom:1.75rem;position:relative;}
+.step::before{content:'';position:absolute;left:19px;top:40px;bottom:0;width:1px;background:rgba(255,255,255,.08);}
+.step:last-child::before{display:none;}
+.step-num{width:40px;height:40px;border-radius:50%;background:#F3D2C9;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.72rem;color:var(--black);flex-shrink:0;position:relative;z-index:1;}
+.step-title-w{font-weight:700;font-size:.93rem;color:var(--white);margin-bottom:.3rem;}
+.step-desc-w{font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.75;}
+
+/* ── SUMMARY TABLE ── */
+.summary-table{width:100%;border-collapse:collapse;margin-top:1.5rem;}
+.summary-table tr{border-bottom:1px solid var(--border);}
+
+.summary-table td{padding:.9rem .25rem;vertical-align:top;font-size:.87rem;line-height:1.7;}
+.summary-table td:first-child{width:36%;font-weight:700;color:var(--ink-light);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;padding-right:1rem;}
+.summary-table td:last-child{color:var(--ink-mid);}
+
+/* ── NOTE BAR ── */
+.note-bar{background:#fefce8;border-radius:.75rem;padding:.75rem 1rem;font-size:.78rem;color:#78350f;margin-top:2rem;line-height:1.65;}
+.note-bar strong{color:#92400e;}
+
+/* ── CASE NAV ── */
+.case-nav{background:#fafafa;padding:2rem 1.5rem;}
+.case-nav-inner{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+.cn-link{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--ink);font-weight:700;font-size:.88rem;transition:color .2s;}
+.cn-link:hover{color:var(--purple);}
+.cn-link svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;}
+@media(max-width:540px){.case-nav-inner{flex-direction:column;align-items:flex-start;gap:1.5rem;}.cn-link:last-child div{text-align:left;}}
+.cn-label{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-light);margin-bottom:.15rem;}
+
+/* ── FOOTER ── */
+footer{background:var(--purple);padding:2rem 1.5rem;}
+.fi{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.flogo{font-weight:900;font-size:1.1rem;color:var(--white);letter-spacing:-.02em;}
+.flogo span{color:#A78BFA;}
+.flinks{display:flex;gap:1.5rem;}
+.flinks a{font-size:.8rem;font-weight:600;color:var(--white);text-decoration:none;transition:color .2s;}
+.flinks a:hover{color:rgba(255,255,255,.65);}
+
+/* ── BTT ── */
+#btt{position:fixed;bottom:1.5rem;right:1.5rem;width:40px;height:40px;border-radius:50%;background:var(--purple);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;z-index:90;}
+#btt.show{opacity:1;pointer-events:all;}
+#btt svg{width:16px;height:16px;stroke:var(--white);fill:none;stroke-width:2.5;}
+.hl{display:inline;background:linear-gradient(rgba(235,252,119,0) 55%,#EBFC77 55%);white-space:normal;}.hl-strong{display:inline;background:linear-gradient(rgba(220,245,60,0) 55%,#DCF53C 55%);white-space:normal;}.hl-dark{display:inline;background:linear-gradient(rgba(200,230,30,0) 55%,#C8E61E 55%);white-space:normal;}
+.img-full{width:100%;background:#F2F2F2;overflow:hidden;display:flex;justify-content:center;}
+.img-full img{width:100%;max-width:1200px;height:auto;display:block;}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<nav id="nav">
+  <a href="michelle-kato.html" class="nav-logo">Mi<span>✦</span>Kato</a>
+  <a href="michelle-kato.html#work" class="nav-back">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    All work
+  </a>
+</nav>
+
+
+<!-- ═══ HERO ═══ -->
+<div class="cs-hero">
+  <div class="cs-hero-inner">
+    <h1 class="cs-h1 r d1">Rethinking Document Sending,<br/><em>Starting with the Basics.</em></h1>
+    <p class="cs-subtitle r d2">Testing a faster path for simple document sending before scaling to complex workflows</p>
+    <div class="cs-meta r d3">
+      <div>
+        <div class="cs-meta-label">Role</div>
+        <div class="cs-meta-value">Product Designer</div>
+      </div>
+      <div>
+        <div class="cs-meta-label">Collaborators</div>
+        <div class="cs-meta-value">Audrey (Design Lead) · Bruno (UI Lead) · Cadu (Data Analyst) · Mariana (Product Manager) · Zé (Team Lead)</div>
+      </div>
+      <div>
+        <div class="cs-meta-label">Context</div>
+        <div class="cs-meta-value">Document signing platform · Enterprise</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ OVERVIEW STRIP ═══ -->
+<div class="overview-strip">
+  <div class="wrap-wide">
+    <div class="ov-grid r">
+      <div class="ov-cell">
+        <div class="ov-val">17</div>
+        <div class="ov-lbl">Interviews across customers, competitors, and internal users</div>
+      </div>
+      <div class="ov-cell">
+        <div class="ov-val">3</div>
+        <div class="ov-lbl">Proto-personas defined from research</div>
+      </div>
+      <div class="ov-cell">
+        <div class="ov-val">35</div>
+        <div class="ov-lbl">Participants in the Design Sprint</div>
+      </div>
+      <div class="ov-cell">
+        <div class="ov-val">2</div>
+        <div class="ov-lbl">Directions explored: traditional vs conversational</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ AT A GLANCE ═══ -->
+<div class="sec-white">
+  <div class="wrap">
+    <span class="eyebrow r">01 — At a glance</span>
+    <h2 class="sec-h r d1">What this<br/><em>project covers.</em></h2>
+
+    <ul class="r d2" style="list-style:disc;padding-left:1.25rem;display:flex;flex-direction:column;gap:.6rem;margin-top:1rem;">
+      <li class="body-text" style="margin:0;">17 interviews across customers, competitors, and internal users</li>
+      <li class="body-text" style="margin:0;">3 proto-personas defined</li>
+      <li class="body-text" style="margin:0;">Opportunity identified beyond simple use cases</li>
+      <li class="body-text" style="margin:0;">Limited automation and proactive guidance</li>
+      <li class="body-text" style="margin:0;">Design Sprint with 35 participants across the company</li>
+      <li class="body-text" style="margin:0;">Two directions explored: traditional flow vs conversational approach</li>
+      <li class="body-text" style="margin:0;">Chosen direction: conversational experiment</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ═══ PROBLEM ═══ -->
+<div class="sec-gray">
+  <div class="wrap">
+    <span class="eyebrow r">02 — Problem</span>
+    <h2 class="sec-h r d1">Works for simple use.<br/><em>Not as needs grow.</em></h2>
+    <p class="body-text r d2">The document sending flow works well for simple use, but becomes less efficient as needs grow.</p>
+    <p class="body-text r d3">As volume or complexity increases:</p>
+
+    <div class="three-col r d4">
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Effort increases</div>
+        <div class="col-card-desc-dark">What works for one document doesn't scale as frequency or configuration needs grow.</div>
+      </div>
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Confidence can drop</div>
+        <div class="col-card-desc-dark">Without clear guidance, users aren't sure their setup is correct before sending.</div>
+      </div>
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Steps move outside the flow</div>
+        <div class="col-card-desc-dark">Additional validation steps are needed — some end up handled outside the main flow.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CHALLENGE ═══ -->
+<div class="sec-white">
+  <div class="wrap">
+    <span class="eyebrow r">03 — Challenge</span>
+    <h2 class="sec-h r d1">Improve efficiency<br/><em>without adding complexity.</em></h2>
+    <p class="body-text r d2">How might we improve efficiency and confidence in document sending <span class="hl"><strong>without adding more complexity to the experience?</strong></span></p>
+  </div>
+</div>
+
+
+<!-- ═══ OPPORTUNITY ═══ -->
+<div class="sec-gray">
+  <div class="wrap">
+    <span class="eyebrow r">04 — Opportunity</span>
+    <h2 class="sec-h r d1">Reduce friction.<br/><em>Improve confidence.</em></h2>
+    <p class="body-text r d2">Reduce friction in repetitive tasks and improve confidence in configuration.</p>
+    <p class="body-text r d3">Key opportunities identified:</p>
+
+    <div class="two-col r d4">
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Reduce manual repetition</div>
+        <div class="col-card-desc-dark">Recurring tasks shouldn't require the same effort every time.</div>
+      </div>
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Introduce smart defaults</div>
+        <div class="col-card-desc-dark">The system should assume sensible behaviors instead of asking everything upfront.</div>
+      </div>
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Guide instead of asking everything</div>
+        <div class="col-card-desc-dark">Step-by-step guidance reduces the cognitive load of full configuration upfront.</div>
+      </div>
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Shorten time to send</div>
+        <div class="col-card-desc-dark">Fewer decisions between intent and execution means faster, more confident completion.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ APPROACH ═══ -->
+<div class="sec-white">
+  <div class="wrap">
+    <span class="eyebrow r">05 — Approach</span>
+    <h2 class="sec-h r d1">Reframe around<br/><em>efficiency and confidence.</em></h2>
+    <p class="body-text r d2">We reframed the problem around efficiency and confidence.</p>
+    <p class="body-text r d3">Instead of exposing all configuration upfront, we explored:</p>
+
+    <ul class="r d4" style="list-style:disc;padding-left:1.25rem;display:flex;flex-direction:column;gap:.6rem;margin-top:1rem;margin-bottom:1.75rem;">
+      <li class="body-text" style="margin:0;">assuming default behaviors</li>
+      <li class="body-text" style="margin:0;">reducing unnecessary decisions</li>
+      <li class="body-text" style="margin:0;">guiding step by step</li>
+      <li class="body-text" style="margin:0;">enabling faster completion</li>
+    </ul>
+
+    <table class="summary-table r d5">
+      <tr>
+        <td>Target</td>
+        <td>Reduce interaction effort in multi-step flows</td>
+      </tr>
+      <tr>
+        <td>Expected behavior change</td>
+        <td>From multiple steps and repeated checks — to completing the process in one session, with confidence</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══ PROCESS ═══ -->
+<div class="sec-black">
+  <div class="wrap">
+    <span class="eyebrow eyebrow-w r">06 — Process</span>
+    <h2 class="sec-h sec-h-w r d1">From research<br/>to a <em>focused experiment.</em></h2>
+
+    <div class="steps r d2">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title-w">Discovery</div>
+          <div class="step-desc-w">Interviews with 17 participants · Quantitative data analysis · Benchmarking · Usability testing on the current flow</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title-w">Design Sprint (3 days)</div>
+          <div class="step-desc-w">35 participants from different areas · Adapted format · Final output: Crazy 8s<br/>Goal: align on the problem and explore solution directions collaboratively</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title-w">Concept Exploration</div>
+          <div class="step-desc-w">Two directions explored: an improved traditional flow and a conversational approach</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title-w">Decision</div>
+          <div class="step-desc-w">The conversational direction was selected for further exploration — not as a full solution, but as an experiment</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title-w">Experiment Design</div>
+          <div class="step-desc-w">Intentionally started simple. Target: Fast Operator · Scope: 1 document, up to 5 signers, minimal configuration<br/>Principles: assume defaults · ask only what matters · guide step by step · allow edits without blocking<br/>The conversational flow acts as a shortcut, not a replacement.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <div class="step-title-w">Hypothesis</div>
+          <div class="step-desc-w">Do people choose a faster path when everything is already standard?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ USABILITY TESTS — full ═══ -->
+<div class="img-full r">
+  <img src="imgs/c-full-usabilitytest-interviews.png" alt="Usability tests and interviews"/>
+</div>
+<p class="img-caption r" style="max-width:680px;margin-left:auto;margin-right:auto;margin-top:1rem;padding:0 1.5rem;">Discovery — usability tests and interviews across different user profiles</p>
+
+
+<!-- ═══ PROTO-PERSONAS ═══ -->
+<div class="sec-white" style="padding-top:64px;padding-bottom:0;">
+  <div class="wrap">
+    <span class="eyebrow r">Research</span>
+    <h2 class="sec-h r d1">3 proto-personas<br/><em>defined from research.</em></h2>
+    <p class="body-text r d2">Synthesized from interviews and support data, the proto-personas helped the team align on who we were designing for — and why the current flow wasn't working for all of them.</p>
+    <div class="img-block r" style="margin-top:1.5rem;">
+      <img src="imgs/c-protopersona.png" alt="Proto-persona detail"/>
+    </div>
+    <p class="img-caption r">Proto-persona — synthesized from interviews and support ticket analysis</p>
+  </div>
+</div>
+<div class="img-full r">
+  <img src="imgs/c-full-protopersona-visaogeral.png" alt="Proto-personas overview"/>
+</div>
+<p class="img-caption r" style="max-width:680px;margin-left:auto;margin-right:auto;margin-top:1rem;padding:0 1.5rem;">Proto-personas — full overview of the 3 profiles mapped during research</p>
+
+
+<!-- ═══ BENCHMARKING ═══ -->
+<div class="sec-white" style="padding-bottom:0;">
+  <div class="wrap">
+    <span class="eyebrow r">Benchmarking</span>
+    <h2 class="sec-h r d1">What others do.<br/><em>What still falls short.</em></h2>
+    <p class="body-text r d2">Benchmarking helped identify patterns in how similar platforms handle sending flows — and where most still require too much from the user.</p>
+    <div class="img-block r" style="margin-top:1.5rem;">
+      <img src="imgs/c-benchmarking-tabelacomparativa.png" alt="Benchmarking comparative table"/>
+    </div>
+    <p class="img-caption r">Comparative benchmarking — how competitors handle document sending flows</p>
+  </div>
+</div>
+<div class="img-full r">
+  <img src="imgs/c-full-benchmarking-visaogeral.png" alt="Benchmarking overview"/>
+</div>
+<p class="img-caption r" style="max-width:680px;margin-left:auto;margin-right:auto;margin-top:1rem;padding:0 1.5rem 2rem;">Benchmarking overview — full competitive analysis across platforms</p>
+
+
+<!-- ═══ DESIGN SPRINT ═══ -->
+<div class="sec-gray">
+  <div class="wrap">
+    <span class="eyebrow r">Design Sprint</span>
+    <h2 class="sec-h r d1">35 people.<br/><em>3 days. One direction.</em></h2>
+    <p class="body-text r d2">With 35 participants from different areas of the company, the sprint was adapted to allow diverse voices to contribute. The final output was a set of Crazy 8s that guided the two concept directions.</p>
+    <p class="body-text r d3"><strong>Goal:</strong> align on the problem and explore solution directions collaboratively — before any design decisions were made in isolation.</p>
+
+    <div class="img-block r">
+      <img src="imgs/c-designsprint-visaogeral.png" alt="Design Sprint overview"/>
+    </div>
+    <p class="img-caption r">Design Sprint — 35 participants from product, design, engineering, and beyond</p>
+
+    <div class="img-block r">
+      <img src="imgs/c-designsprint-eufalando.png" alt="Facilitating the Design Sprint"/>
+    </div>
+    <p class="img-caption r">Facilitating the sprint — keeping 35 people aligned across multiple sessions</p>
+  </div>
+</div>
+
+
+<!-- ═══ WHAT WE MEASURE ═══ -->
+<div class="sec-white">
+  <div class="wrap">
+    <span class="eyebrow r">Validation</span>
+    <h2 class="sec-h r d1">What we<br/><em>measure.</em></h2>
+    <p class="body-text r d2">To validate the experiment, we focused on behavioral signals — not just satisfaction:</p>
+
+    <div class="two-col r d3">
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Adoption of the shortcut</div>
+        <div class="col-card-desc-dark">Do users actively choose the faster path when it's available?</div>
+      </div>
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Time to send</div>
+        <div class="col-card-desc-dark">Does the conversational flow reduce time from intent to completion?</div>
+      </div>
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Number of clicks</div>
+        <div class="col-card-desc-dark">Is the interaction effort meaningfully lower than the standard flow?</div>
+      </div>
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Completion rate</div>
+        <div class="col-card-desc-dark">Do people who start the conversational flow actually finish it?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ AI SECTION ═══ -->
+<div class="sec-gray">
+  <div class="wrap">
+    <span class="eyebrow r">07 — How AI was used</span>
+    <h2 class="sec-h r d1">Faster execution.<br/><em>Same grounding.</em></h2>
+
+    <div class="r" style="display:flex;justify-content:center;margin:1.75rem 0;">
+      <img src="imgs/c-img.png" alt="" style="width:250px;max-width:100%;height:auto;display:block;"/>
+    </div>
+
+    <div class="two-col r d2">
+      <div class="col-card-w">
+        <div class="col-card-title-dark">NotebookLM</div>
+        <div class="col-card-desc-dark">Used to cluster interview transcripts and connect support data with qualitative insights.</div>
+      </div>
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Figma Make</div>
+        <div class="col-card-desc-dark">Used to translate sprint decisions into navigable prototypes in under 2 days.</div>
+      </div>
+    </div>
+
+    <p class="body-text r" style="margin-top:1.5rem;">AI supported execution speed. Decisions remained grounded in real user behavior and team alignment.</p>
+
+    <div class="img-block r" style="margin-top:1.75rem;">
+      <img src="imgs/c-notebooklm-ia.png" alt="NotebookLM AI synthesis"/>
+    </div>
+    <p class="img-caption r">Research synthesis — AI-assisted clustering of interview transcripts and support ticket patterns</p>
+  </div>
+</div>
+
+
+<!-- ═══ WHY CONVERSATIONAL ═══ -->
+<div class="sec-white">
+  <div class="wrap">
+    <span class="eyebrow r">08 — Why conversational</span>
+    <h2 class="sec-h r d1">Step by step.<br/><em>Less cognitive load.</em></h2>
+    <p class="body-text r d2">Instead of requiring full configuration upfront, the system guides the person step by step and reduces cognitive load.</p>
+    <p class="body-text r d3">The focus is not on adding features, but on <span class="hl"><strong>helping the person complete the task faster with less effort.</strong></span></p>
+  </div>
+</div>
+
+
+<!-- ═══ HANDOFF — full ═══ -->
+<div class="img-full r" style="background:#222224;">
+  <img src="imgs/c-full-handoff.png" alt="Experiment design and handoff"/>
+</div>
+<p class="img-caption r" style="max-width:680px;margin-left:auto;margin-right:auto;margin-top:1rem;padding:0 1.5rem;">Experiment design — conversational flow specs and interaction details</p>
+
+
+<!-- ═══ KEY DECISIONS ═══ -->
+<div class="sec-gray">
+  <div class="wrap">
+    <span class="eyebrow r">09 — Key decisions</span>
+    <h2 class="sec-h r d1">Intentional<br/><em>constraints.</em></h2>
+
+    <div class="two-col r d2">
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Start with the simplest use case</div>
+        <div class="col-card-desc-dark">1 document, up to 5 signers, minimal configuration. Validate behavior before increasing scope.</div>
+      </div>
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Validate before expanding scope</div>
+        <div class="col-card-desc-dark">Don't build complexity until simpler patterns are confirmed to work.</div>
+      </div>
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Keep the existing flow available</div>
+        <div class="col-card-desc-dark">The conversational flow is an optional path — not a replacement for the current experience.</div>
+      </div>
+      <div class="col-card-w">
+        <div class="col-card-title-dark">Treat it as an optional path</div>
+        <div class="col-card-desc-dark">Users who prefer the traditional flow can still use it. The conversational flow is a shortcut, not a mandate.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ WHAT THIS IS NOT ═══ -->
+<div class="sec-white">
+  <div class="wrap">
+    <span class="eyebrow r">What this is not</span>
+    <h2 class="sec-h r d1">A focused<br/><em>experiment.</em></h2>
+
+    <ul class="r d2" style="list-style:disc;padding-left:1.25rem;display:flex;flex-direction:column;gap:.75rem;margin-top:1rem;margin-bottom:1.5rem;">
+      <li class="body-text" style="margin:0;">Not the final solution</li>
+      <li class="body-text" style="margin:0;">Not addressing complex workflows yet</li>
+      <li class="body-text" style="margin:0;">Not replacing the current experience</li>
+    </ul>
+
+    <p class="body-text r d3"><span class="hl"><strong>This is a focused experiment.</strong></span></p>
+  </div>
+</div>
+
+
+<!-- ═══ KEY TAKEAWAY ═══ -->
+<div class="sec-black">
+  <div class="wrap">
+    <span class="eyebrow eyebrow-w r">10 — Key takeaway</span>
+    <h2 class="sec-h sec-h-w r d1">Validate speed first.<br/><em>Then complexity.</em></h2>
+    <p class="body-text body-text-w r d2">Before addressing complexity, validate the need for speed.</p>
+    <p class="body-text body-text-w r d3">If people choose a faster path when things are simple, that signal supports expanding the approach.</p>
+    <p class="body-text body-text-w r d4">If not, we learn early and adjust direction.</p>
+  </div>
+</div>
+
+
+<!-- ═══ CASE NAV ═══ -->
+<div class="case-nav">
+  <div class="case-nav-inner">
+    <a href="michelle-kato.html#work" class="cn-link">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <div>
+        <div class="cn-label">Back to</div>
+        All case studies
+      </div>
+    </a>
+    <a href="case-journey-maps-loyalty-program.html" class="cn-link">
+      <div style="text-align:right;">
+        <div class="cn-label">Next case</div>
+        Journey Maps for a Complex Loyalty Program
+      </div>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="fi">
+    <span class="flogo">Mi<span>✦</span>Kato</span>
+    <div class="flinks">
+      <a href="https://linkedin.com/in/michellekato" target="_blank">LinkedIn</a>
+      <a href="https://medium.com/@michelle-kato" target="_blank">Medium</a>
+      <a href="https://www.youtube.com/@michelle-kato" target="_blank">YouTube</a>
+    </div>
+  </div>
+</footer>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<script>
+const prog = document.getElementById('prog');
+const nav  = document.getElementById('nav');
+const btt  = document.getElementById('btt');
+
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  prog.style.width = pct + '%';
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+  btt.classList.toggle('show', window.scrollY > 400);
+});
+
+const els = document.querySelectorAll('.r');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+els.forEach(el => obs.observe(el));
+requestAnimationFrame(() => {
+  els.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight + 50) el.classList.add('on'); });
+});
+</script>
+</body>
+</html>
