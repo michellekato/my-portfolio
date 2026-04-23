@@ -1,2 +1,2 @@
 # my-portfolio
-Porfolio files
+Personal porfolio files
