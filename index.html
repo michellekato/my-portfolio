@@ -309,7 +309,15 @@ footer{background:var(--purple);padding:1.25rem 1.5rem;}
       </div>
     </div>
     <div class="r d2">
-      <img src="imgs/animar.gif" alt="" class="gif-hero" style="display:block;width:100%;max-width:520px;border-radius:1.25rem;"/>
+      <div class="me-wrap">
+        <video class="me-video" id="heroVid" autoplay muted loop playsinline>
+          <source src="imgs/video.mp4" type="video/mp4">
+        </video>
+        <button class="me-sound" id="soundBtn" aria-label="Toggle sound">
+          <svg id="iconMuted" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg id="iconSound" viewBox="0 0 24 24" style="display:none"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>
