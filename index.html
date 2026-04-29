@@ -53,10 +53,10 @@ nav.scrolled{border-color:rgba(0,0,0,.08);box-shadow:0 1px 0 rgba(0,0,0,.06);}
 .sec{padding:88px 0;}
 .sec-sm{padding:68px 0;}
 .eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-light);margin-bottom:.75rem;display:block;}
-.ttl{font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;font-size:clamp(2.5rem,7vw,4.2rem);line-height:1;letter-spacing:-.03em;color:var(--ink);margin-bottom:1.5rem;}
+.ttl{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(2.5rem,7vw,4.2rem);line-height:1;letter-spacing:-.03em;color:var(--ink);margin-bottom:1.5rem;}
 .ttl em{font-style:normal;color:var(--ink);}
 .ttl-w{color:var(--white);}
-.ttl-sm{font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;font-size:clamp(1rem,2vw,1.35rem);line-height:1.2;letter-spacing:-.02em;color:var(--ink);margin-bottom:1rem;}
+.ttl-sm{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(1rem,2vw,1.35rem);line-height:1.2;letter-spacing:-.02em;color:var(--ink);margin-bottom:1rem;}
 .ttl-w em{color:var(--white)!important;}
 .body{font-size:.93rem;color:var(--ink-mid);line-height:1.8;margin-bottom:1.25rem;max-width:720px;}
 .body-dim{color:rgba(255,255,255,.75);}
@@ -86,7 +86,7 @@ nav.scrolled{border-color:rgba(0,0,0,.08);box-shadow:0 1px 0 rgba(0,0,0,.06);}
   align-items:center;
   text-align:center;
 }
-.hero-statement{font-family:'Plus Jakarta Sans',sans-serif;font-weight:900;font-size:clamp(2rem,4.8vw,3.8rem);line-height:1.1;letter-spacing:-.03em;color:var(--ink);margin-bottom:2.5rem;}
+.hero-statement{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(2rem,4.8vw,3.8rem);line-height:1.1;letter-spacing:-.03em;color:var(--ink);margin-bottom:2.5rem;}
 .grad-phrase{background:linear-gradient(90deg,var(--purple) 0%,#A8DAFF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero-sub{font-size:.95rem;color:var(--ink-light);line-height:1.8;margin-bottom:1.75rem;}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
@@ -188,6 +188,17 @@ nav.scrolled{border-color:rgba(0,0,0,.08);box-shadow:0 1px 0 rgba(0,0,0,.06);}
 .lcard{display:flex;align-items:center;justify-content:center;opacity:.35;transition:opacity .3s;filter:grayscale(1);}
 .lcard:hover{opacity:.65;}
 .lcard img{height:48px;width:auto;display:block;}
+
+/* FIXED LOGOS BAR */
+
+/* FEATURED QUOTE (Vanta-style) */
+.feat-quote{padding:100px 0;background:#CDD2F8;text-align:center;}
+.fq-logo{height:56px;width:auto;opacity:.5;filter:grayscale(1);margin:0 auto 1rem;display:block;}
+.fq-text{font-size:clamp(1.2rem,2.6vw,1.6rem);font-weight:500;color:var(--ink);line-height:1.75;max-width:680px;margin:0 auto 2.25rem;font-style:italic;}
+.fq-author{display:inline-flex;align-items:center;gap:.85rem;text-decoration:none;}
+.fq-author-photo{width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.fq-author-name{font-weight:700;font-size:.85rem;color:var(--ink);display:block;text-align:left;}
+.fq-author-role{font-size:.76rem;color:var(--ink-light);display:block;text-align:left;margin-top:.1rem;}
 
 /* WHY ME BLOCKS */
 .why-block{margin-top:5rem;padding-top:5rem;}
@@ -393,9 +404,9 @@ Senior designer. Global products. 12 years turning complexity into clarity.
     <div class="logos-row">
       <span class="logos-label r d1">Trusted by 12 companies in USA and Brazil</span>
       <div class="logos-grid">
-        <div class="lcard r d1"><img src="imgs/logo-fsl.png" alt="FullStack Labs"/></div>
-        <div class="lcard r d2"><img src="imgs/logo-lexisnexis.png" alt="LexisNexis"/></div>
-        <div class="lcard r d3"><img src="imgs/logo-mgm.png" alt="MGM Resorts"/></div>
+        <div class="lcard r d1"><img src="imgs/logo-mgm.png" alt="MGM Resorts"/></div>
+        <div class="lcard r d2"><img src="imgs/logo-fsl.png" alt="FullStack Labs"/></div>
+        <div class="lcard r d3"><img src="imgs/logo-lexisnexis.png" alt="LexisNexis"/></div>
         <div class="lcard r d4"><img src="imgs/logo-procore.png" alt="Procore"/></div>
         <div class="lcard r d5"><img src="imgs/logo-dci.png" alt="DCI"/></div>
       </div>
@@ -404,6 +415,21 @@ Senior designer. Global products. 12 years turning complexity into clarity.
 </div>
 
 
+
+<!-- ═══ FEATURED QUOTE ═══ -->
+<div class="feat-quote">
+  <div class="wrap" style="display:flex;flex-direction:column;align-items:center;">
+    <img class="fq-logo r d1" src="imgs/logo-mgm.png" alt="MGM Resorts"/>
+    <p class="fq-text r d2">"Michelle has been exceptional in her role as a product designer for FullStack. Her work for MGM Resorts has been outstanding, showcasing her talent and dedication. She consistently brings a positive attitude and has been incredibly helpful throughout our collaboration."</p>
+    <a href="https://www.linkedin.com/in/linkedinscotcopeland/" target="_blank" class="fq-author r d3">
+      <img class="fq-author-photo" src="imgs/p-scot.png" alt="Scot Copland"/>
+      <div>
+        <span class="fq-author-name">Scot Copland</span>
+        <span class="fq-author-role">Design Director · MGM Resorts</span>
+      </div>
+    </a>
+  </div>
+</div>
 
 <!-- ═══ WHY ME ═══ -->
 <div class="proof" style="background:var(--gray)">
@@ -613,5 +639,7 @@ document.querySelectorAll('.arrows').forEach(arrows => {
 
 </script>
 <script src="shared.js"></script>
+
+
 </body>
 </html>
