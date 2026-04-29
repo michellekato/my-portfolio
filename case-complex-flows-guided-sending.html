@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex, nofollow"/>
 <title>Rethinking Document Sending — Michelle Kato</title>
 <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
+<link rel="stylesheet" href="shared.css"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet"/>
@@ -27,7 +28,7 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;line-height:1.6;}
 
-#prog{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:999;transition:width .1s linear;border-radius:0 2px 2px 0;}
+#prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#6D28D9,#A8DAFF);width:0%;z-index:999;transition:width .1s linear;border-radius:0 2px 2px 0;}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 1.5rem;height:54px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s;}
 nav.scrolled{border-color:rgba(0,0,0,.08);box-shadow:0 1px 0 rgba(0,0,0,.06);}
@@ -169,18 +170,14 @@ nav.scrolled{border-color:rgba(0,0,0,.08);box-shadow:0 1px 0 rgba(0,0,0,.06);}
 .cn-label{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-light);margin-bottom:.15rem;}
 
 /* ── FOOTER ── */
-footer{background:var(--purple);padding:2rem 1.5rem;}
+
 .fi{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.flogo{font-weight:900;font-size:1.1rem;color:var(--white);letter-spacing:-.02em;}
-.flogo span{color:#A78BFA;}
 .flinks{display:flex;gap:1.5rem;}
 .flinks a{font-size:.8rem;font-weight:600;color:var(--white);text-decoration:none;transition:color .2s;}
 .flinks a:hover{color:rgba(255,255,255,.65);}
 
 /* ── BTT ── */
-#btt{position:fixed;bottom:1.5rem;right:1.5rem;width:40px;height:40px;border-radius:50%;background:var(--purple);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;z-index:90;}
-#btt.show{opacity:1;pointer-events:all;}
-#btt svg{width:16px;height:16px;stroke:var(--white);fill:none;stroke-width:2.5;}
+
 .hl{display:inline;background:linear-gradient(rgba(235,252,119,0) 55%,#EBFC77 55%);white-space:normal;}.hl-strong{display:inline;background:linear-gradient(rgba(220,245,60,0) 55%,#DCF53C 55%);white-space:normal;}.hl-dark{display:inline;background:linear-gradient(rgba(200,230,30,0) 55%,#C8E61E 55%);white-space:normal;}
 .img-full{width:100%;background:#F2F2F2;overflow:hidden;display:flex;justify-content:center;}
 .img-full img{width:100%;max-width:1200px;height:auto;display:block;}
@@ -257,7 +254,6 @@ footer{background:var(--purple);padding:2rem 1.5rem;}
       <li class="body-text" style="margin:0;">17 interviews across customers, competitors, and internal users</li>
       <li class="body-text" style="margin:0;">3 proto-personas defined</li>
       <li class="body-text" style="margin:0;">Opportunity identified beyond simple use cases</li>
-      <li class="body-text" style="margin:0;">Limited automation and proactive guidance</li>
       <li class="body-text" style="margin:0;">Design Sprint with 35 participants across the company</li>
       <li class="body-text" style="margin:0;">Two directions explored: traditional flow vs conversational approach</li>
       <li class="body-text" style="margin:0;">Chosen direction: conversational experiment</li>
@@ -270,8 +266,8 @@ footer{background:var(--purple);padding:2rem 1.5rem;}
 <div class="sec-gray">
   <div class="wrap">
     <span class="eyebrow r">02 — Problem</span>
-    <h2 class="sec-h r d1">Works for simple use.<br/><em>Not as needs grow.</em></h2>
-    <p class="body-text r d2">The document sending flow works well for simple use, but becomes less efficient as needs grow.</p>
+    <h2 class="sec-h r d1">Works for simple use.<br/><em>Not complex ones.</em></h2>
+    <p class="body-text r d2">The document sending flow works well for simple use, but becomes less efficient for complex ones.</p>
     <p class="body-text r d3">As volume or complexity increases:</p>
 
     <div class="three-col r d4">
@@ -285,7 +281,7 @@ footer{background:var(--purple);padding:2rem 1.5rem;}
       </div>
       <div class="col-card-w">
         <div class="col-card-title-dark">Steps move outside the flow</div>
-        <div class="col-card-desc-dark">Additional validation steps are needed — some end up handled outside the main flow.</div>
+        <div class="col-card-desc-dark">Additional steps end up handled outside the main flow.</div>
       </div>
     </div>
   </div>
@@ -297,7 +293,7 @@ footer{background:var(--purple);padding:2rem 1.5rem;}
   <div class="wrap">
     <span class="eyebrow r">03 — Challenge</span>
     <h2 class="sec-h r d1">Improve efficiency<br/><em>without adding complexity.</em></h2>
-    <p class="body-text r d2">How might we improve efficiency and confidence in document sending <span class="hl"><strong>without adding more complexity to the experience?</strong></span></p>
+    <p class="body-text r d2">How might we improve efficiency and confidence in document sending <strong>without adding more complexity to the experience?</strong></p>
   </div>
 </div>
 
@@ -545,7 +541,7 @@ footer{background:var(--purple);padding:2rem 1.5rem;}
     <span class="eyebrow r">08 — Why conversational</span>
     <h2 class="sec-h r d1">Step by step.<br/><em>Less cognitive load.</em></h2>
     <p class="body-text r d2">Instead of requiring full configuration upfront, the system guides the person step by step and reduces cognitive load.</p>
-    <p class="body-text r d3">The focus is not on adding features, but on <span class="hl"><strong>helping the person complete the task faster with less effort.</strong></span></p>
+    <p class="body-text r d3">The focus is not on adding features, but on <strong>helping the person complete the task faster with less effort.</strong></p>
   </div>
 </div>
 
@@ -597,7 +593,7 @@ footer{background:var(--purple);padding:2rem 1.5rem;}
       <li class="body-text" style="margin:0;">Not replacing the current experience</li>
     </ul>
 
-    <p class="body-text r d3"><span class="hl"><strong>This is a focused experiment.</strong></span></p>
+    <p class="body-text r d3"><strong>This is a focused experiment.</strong></p>
   </div>
 </div>
 
@@ -607,8 +603,8 @@ footer{background:var(--purple);padding:2rem 1.5rem;}
   <div class="wrap">
     <span class="eyebrow eyebrow-w r">10 — Key takeaway</span>
     <h2 class="sec-h sec-h-w r d1">Validate speed first.<br/><em>Then complexity.</em></h2>
-    <p class="body-text body-text-w r d2">Before addressing complexity, validate the need for speed.</p>
-    <p class="body-text body-text-w r d3">If people choose a faster path when things are simple, that signal supports expanding the approach.</p>
+    <p class="body-text body-text-w r d2">Speed matters. The next step is to validate whether a conversational chat is the best way to deliver it.</p>
+    <p class="body-text body-text-w r d3">If people choose this path when the task is simple, that signal supports expanding the approach.</p>
     <p class="body-text body-text-w r d4">If not, we learn early and adjust direction.</p>
   </div>
 </div>
@@ -635,32 +631,17 @@ footer{background:var(--purple);padding:2rem 1.5rem;}
 </div>
 
 
-<!-- ═══ FOOTER ═══ -->
-<footer>
-  <div class="fi">
-    <span class="flogo">Mi<span>✦</span>Kato</span>
-    <div class="flinks">
-      <a href="https://linkedin.com/in/michellekato" target="_blank">LinkedIn</a>
-      <a href="https://medium.com/@michelle-kato" target="_blank">Medium</a>
-      <a href="https://www.youtube.com/@michelle-kato" target="_blank">YouTube</a>
-    </div>
-  </div>
-</footer>
 
-<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
-  <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
-</button>
+
+
 
 <script>
 const prog = document.getElementById('prog');
 const nav  = document.getElementById('nav');
-const btt  = document.getElementById('btt');
-
 window.addEventListener('scroll', () => {
   const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
   prog.style.width = pct + '%';
   nav.classList.toggle('scrolled', window.scrollY > 20);
-  btt.classList.toggle('show', window.scrollY > 400);
 });
 
 const els = document.querySelectorAll('.r');
@@ -672,5 +653,6 @@ requestAnimationFrame(() => {
   els.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight + 50) el.classList.add('on'); });
 });
 </script>
+<script src="shared.js"></script>
 </body>
 </html>
