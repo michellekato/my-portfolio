@@ -23,6 +23,12 @@
     rel="stylesheet" />
   <style>
     /* PROGRESS */
+    .my-picture {
+      display: flex;
+      justify-self: center;
+      max-width: 14rem;
+    }
+
     #prog {
       position: fixed;
       top: 0;
@@ -225,7 +231,7 @@
     /* HERO */
     .hero {
       background: var(--white);
-      padding: 140px clamp(1.25rem, 5vw, 4rem) 72px;
+      padding: 84px clamp(1.25rem, 5vw, 4rem) 72px;
     }
 
     .hero-grid {
@@ -268,10 +274,6 @@
     .hero-statement {
       max-width: 900px;
       margin: 0 auto 2rem;
-    }
-
-    .hero {
-      padding: 180px clamp(1.25rem, 5vw, 4rem) 100px;
     }
 
     .hero-btns {
@@ -1428,6 +1430,7 @@
 
   <!-- ═══ HERO ═══ -->
   <section class="hero">
+    <img src="imgs/me.jpg" alt="" class="my-picture">
     <div class="hero-grid">
       <div>
         <h1 class="hero-statement r d1">
