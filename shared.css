@@ -68,7 +68,7 @@ nav.scrolled {
 }
 /* ── FOOTER ── */
 footer {
-  background: #6d28d9;
+  background: var(--black);
   padding: 1.25rem clamp(1.25rem, 5vw, 4rem);
 }
 .flinks {
